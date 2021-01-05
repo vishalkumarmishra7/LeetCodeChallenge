@@ -13,10 +13,37 @@ import java.util.HashSet;
 
 public class HappyNumber{
 
+    class Solution {
+        public boolean isHappy(int n) {
+        
+            HashSet<Integer> hSet = new HashSet<>();
+            while(!hSet.contains(n)){
+                // add to Hashset 
+                hSet.add(n);
+                // do square and sum
+                n = addSquare(n);
+                if(n==1)
+                    return true;
+            }
+            return false;
+        }
+    
+        public int addSquare(int n){
+            int sum = 0;
+    
+            while(n!=0){
+                sum += (n%10) * (n%10);
+                n = n/10;
+            }
+            return sum;
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums = {4,19,2,1,2,4,6};
 
-        Solution sol = new Solution();
+        HappyNumber obj = new HappyNumber();
+        HappyNumber.Solution sol = obj.new Solution();
         boolean result = sol.isHappy(nums[1]);
 
         System.out.println("Happy Number? "+result);
@@ -25,28 +52,3 @@ public class HappyNumber{
 
 }
 
-class Solution {
-    public boolean isHappy(int n) {
-    
-        HashSet<Integer> hSet = new HashSet<>();
-        while(!hSet.contains(n)){
-            // add to Hashset 
-            hSet.add(n);
-            // do square and sum
-            n = addSquare(n);
-            if(n==1)
-                return true;
-        }
-        return false;
-    }
-
-    public int addSquare(int n){
-        int sum = 0;
-
-        while(n!=0){
-            sum += (n%10) * (n%10);
-            n = n/10;
-        }
-        return sum;
-    }
-}
